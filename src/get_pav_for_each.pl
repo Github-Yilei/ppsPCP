@@ -36,14 +36,16 @@ while(<FL>){
 		$hash{$key}++;
 		@pre = @arr;
 	}
-	if (eof(FL) and ($pretmp[3]>=$arrtmp[0])){
-		my $key = join "\t",$pre[0],$pretmp[0],$pretmp[3];
-		$hash{$key}++;
-	}
-	elsif (eof(FL)){
-		my $key = join "\t",$arr[0],$arrtmp[0],$arrtmp[3];
-		$hash{$key}++;
-	}
+        if (eof(FL)){
+                if ( ($pre[0] eq $arr[0]) && ($pretmp[3]>=$arrtmp[0]) ){
+                        my $key = join "\t",$pre[0],$pretmp[0],$pretmp[3];
+                        $hash{$key}++;
+                }
+                else{
+                        my $key = join "\t",$arr[0],$arrtmp[0],$arrtmp[3];
+                        $hash{$key}++;
+                }
+        }
 }
 
 my %seq;
